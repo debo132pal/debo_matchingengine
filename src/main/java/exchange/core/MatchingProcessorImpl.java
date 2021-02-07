@@ -10,12 +10,13 @@ import java.util.Map;
 public class MatchingProcessorImpl extends Processor implements IMatchingProcessor {
 
     private Map<String, OrderBook> orderBookMap = new HashMap<>();
+    private HashMap<String,Order>  _ordCtx = new HashMap<>();
+
     private IDGenerator idGenerator ;
+
     public MatchingProcessorImpl(int idx) {
         super(idx);
     }
-    private HashMap<String,Order>  _ordCtx = new HashMap<>();
-
     public void setIdGenerator( IDGenerator gen ){
         idGenerator = gen;
     }

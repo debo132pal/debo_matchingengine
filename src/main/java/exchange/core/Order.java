@@ -98,6 +98,10 @@ public class Order implements Comparable<Order> {
         this.timeStamp = timeStamp;
     }
 
+    public void setOrdID(String id) {
+        orderID = id;
+    }
+
     @Override
     public int compareTo(Order o) {
         if (getPrice().value() < o.getPrice().value()) {
@@ -126,15 +130,12 @@ public class Order implements Comparable<Order> {
         ord.setLeavesQty(noMsg.getQty());
         ord.setTotalQty(noMsg.getQty());
         ord.setOrdType(noMsg.getOrdType());
-        if( noMsg.getPrice().value() > 0 ) {
-            ord.setPrice(new Price(noMsg.getPrice()));
+        if (noMsg.getPrice() != Price.UNSET) {
+            ord.setPrice(noMsg.getPrice());
         }
         ord.setSide(noMsg.getSide());
         ord.setMsgHandler(noMsg.getMsgHandler());
         return ord;
     }
 
-    public void setOrdID(String id) {
-        orderID = id;
-    }
 }
