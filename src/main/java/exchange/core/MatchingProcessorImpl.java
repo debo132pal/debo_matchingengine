@@ -10,7 +10,7 @@ import java.util.Map;
 public class MatchingProcessorImpl extends Processor implements IMatchingProcessor {
 
     private Map<String, OrderBook> orderBookMap = new HashMap<>();
-    private HashMap<String,Order>  _ordCtx = new HashMap<>();
+    private HashMap<String,Order>  ordCtx = new HashMap<>();
 
     private IDGenerator idGenerator ;
 
@@ -46,12 +46,12 @@ public class MatchingProcessorImpl extends Processor implements IMatchingProcess
 
     @Override
     public void registerOrdIfAddedToBook(Order newOrd) {
-        _ordCtx.put( newOrd.getOrdID() , newOrd );
+        ordCtx.put( newOrd.getOrdID() , newOrd );
     }
 
     @Override
     public void handle(AmendOrder msg) {
-        Order order = _ordCtx.get(msg.getOrderID());
+        Order order = ordCtx.get(msg.getOrderID());
         boolean doReject = false ;
         if( order != null ){
            if( msg.getQty() > 0 ) {
@@ -80,7 +80,7 @@ public class MatchingProcessorImpl extends Processor implements IMatchingProcess
 
     @Override
     public void handle(CancelOrder msg) {
-        Order order = _ordCtx.get(msg.getOrderID());
+        Order order = ordCtx.get(msg.getOrderID());
         boolean doReject = false ;
         if( order == null ) {
             doReject = true;
@@ -97,7 +97,7 @@ public class MatchingProcessorImpl extends Processor implements IMatchingProcess
 
     @Override
     public void removeOrder(Order order) {
-        _ordCtx.remove(order.getOrdID());
+        ordCtx.remove(order.getOrdID());
     }
 
     @Override

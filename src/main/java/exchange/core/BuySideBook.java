@@ -19,14 +19,19 @@ public class BuySideBook extends Book {
 
     @Override
     public boolean handleLeavesQty(Order order) {
-        if (order.getLeavesQty() > 0 && order.getOrdType() == OrdType.LIMIT) {
-            idx++;
-            orderIdToIdx.put(order.getOrdID(), idx);
-            buyBook.insert(idx, order);
-            return true;
-        } else {
-            Canceled canceled = Canceled.createCanceled(order);
-            matchingProcessor.handle(canceled);
+        OrdType ordType = order.getOrdType();
+        switch (ordType) {
+            case LIMIT:
+                if (order.getLeavesQty() > 0) {
+                    idx++;
+                    orderIdToIdx.put(order.getOrdID(), idx);
+                    buyBook.insert(idx, order);
+                    return true;
+                } else
+                    return false;
+            case MKT:
+                Canceled canceled = Canceled.createCanceled(order);
+                matchingProcessor.handle(canceled);
         }
         return false;
     }
