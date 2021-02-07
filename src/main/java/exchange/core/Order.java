@@ -126,7 +126,9 @@ public class Order implements Comparable<Order> {
         ord.setLeavesQty(noMsg.getQty());
         ord.setTotalQty(noMsg.getQty());
         ord.setOrdType(noMsg.getOrdType());
-        ord.setPrice(new Price(noMsg.getPrice()));
+        if( noMsg.getPrice().value() > 0 ) {
+            ord.setPrice(new Price(noMsg.getPrice()));
+        }
         ord.setSide(noMsg.getSide());
         ord.setMsgHandler(noMsg.getMsgHandler());
         return ord;
