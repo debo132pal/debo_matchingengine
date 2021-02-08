@@ -1,21 +1,19 @@
 package exchange.core;
 
 import exchange.events.NewOrder;
-import exchange.util.IMessageHandler;
-import exchange.util.OrdType;
-import exchange.util.Price;
-import exchange.util.Side;
+import exchange.util.*;
 
 public class Order implements Comparable<Order> {
 
     private String orderID;
     private String custOrderID;
+    private String instrument;
     private Price price;
     private long totalQty;
     private long leavesQty;
     private OrdType ordType;
     private Side side;
-    private String instrument;
+
     private IMessageHandler msgHandler;
     private long timeStamp;
 
@@ -137,5 +135,4 @@ public class Order implements Comparable<Order> {
         ord.setMsgHandler(noMsg.getMsgHandler());
         return ord;
     }
-
 }

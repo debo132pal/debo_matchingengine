@@ -1,0 +1,7 @@
+1) Note: I have copied IndexMaxPQ/IndexMinPQ code from  https://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
+2) I used the data structure as i need to add, modify and delete orders  efficiently from the Priority queue
+3) I have maintained  two PQ( max/min )  to support the order matching
+4) This code is  not a low GC code. I could have  pooled the ( frequently used classes)  but will require more coding effort
+5) This is not a standard Fix implementation
+6) The test are not unit but they are sort of integrated tests
+7) Prices i have converted to long by  multiplying with a factor. long comparision are faster than double comparisons
